@@ -2,7 +2,7 @@
 
 int bTx = 2;
 int bRx = 3;
-int buzzer = 4;
+int buzzer = 13;
 
 SoftwareSerial bt(bTx, bRx);
 

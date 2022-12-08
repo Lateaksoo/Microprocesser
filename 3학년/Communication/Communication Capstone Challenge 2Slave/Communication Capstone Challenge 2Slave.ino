@@ -10,7 +10,7 @@ const int BYE = 'b';
 bool state = false;
 byte rec[128];
 
-LiquidCrystal lcd(22, 23, 24, 25, 26, 27);
+LiquidCrystal lcd(32, 33, 34, 35, 36, 37);
 
 void setup() {
   Wire.begin(slave);
