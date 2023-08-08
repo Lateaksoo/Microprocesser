@@ -21,7 +21,7 @@ LCD에 애니메이션을 표시하면 중간에 다른 동작을 할 수 없는
 두 보드는 I2C 통신을 이용하여 통신 상수를 주고 받는다.
 
 #### [Master Board I2C 통신]
-```Arduino
+```c++
 // I2C 통신 함수
 void transferData(char data) {
   Wire.beginTransmission(SLAVE);  // data 전송 시작
