@@ -30,7 +30,7 @@ void transferData(char data) {
 }
 ```
 #### [Master Board 통신용 상수]
-```c
+```c++
 /**
  통신 용 상수
 */
@@ -44,7 +44,7 @@ const char MANAGER_TAGED = 'm';
 ```
 ---
 #### [Slave Board I2C 통신 수신]
-```Arduino
+```c++
 /**
   통신 데이터 저장 배열
 */
@@ -60,7 +60,7 @@ void record(int receiveNum) {
 }
 ```
 #### [Slave Board 통신용 상수]
-```Arduino
+```c++
 /**
  통신 용 상수
 */
@@ -75,7 +75,7 @@ const char EMERGENCY_STOPPED = 'e';
 <br>
 
 2층 버튼에 Interrupt 기능을 사용하여 엘리베이터가 이동중일때 2층 버튼을 누르면 멈추도록 구현하였다.
- ```Arduino
+ ```c++
  //Interrupt
  const int SECOND_FLOOR_BUTTON = 3;
 
