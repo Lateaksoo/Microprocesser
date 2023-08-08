@@ -30,7 +30,7 @@ void transferData(char data) {
 }
 ```
 #### [Master Board 통신용 상수]
-```Arduino
+```c
 /**
  통신 용 상수
 */
