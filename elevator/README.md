@@ -109,6 +109,70 @@ const char EMERGENCY_STOPPED = 'e';
 
 <br><br><br>
 
+RFID 모듈로 통신하여 Card UID 가 일치하는 카드를 태그 시 Relay 모듈을 이용하여 전원 차단
+
+[Relay 동작영상]
+
+[Relay 동작영상]: https://www.youtube.com/watch?v=AJ8Z8YYLbc4
+
+특정 카드만 인식하도록 코드를 설정했다.    
+<span style="color:red">실제로는 보안상 노출하지 않는것이 좋다.</span>
+
+ ```c++
+/**
+  RFID 관련
+*/
+const String MANAGER_CARD = "83 4F 6D 02";  // 관리자 카드 번호
+
+byte nuidPICC[4];                           //카드 ID를 비교하기 위한 배열
+MFRC522 mfrc522(SS_PIN, RST_PIN);           // RFID 객체
+```
+<br>
+
+bool타입 변수로 RFID 태그 여부를 저장한다.
+ ```c++
+ /**
+  릴레이 관련 변수
+*/
+const int RELAY_PIN = 13;
+bool isTaged = true;
+```
 
 
+카드가 태그되었다면 카드의 UID 값을 읽어와서 관리자 카드번호와 맞는지 비교한다. 
+ ```c++
+  /* 태그 카드 관련 */
+  if (!mfrc522.PICC_IsNewCardPresent()) return; //새로운 카드가 없으면 return
+  if (!mfrc522.PICC_ReadCardSerial()) return;   //일련번호가 없다면 return
 
+  String tagedCard = "";                        //Card UID를 저장할 빈 문자열
+
+//카드의 UID 배열을 16진수 문자열로 전환하여 저장
+  for (byte i = 0; i < mfrc522.uid.size; i++) {
+    tagedCard.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+    tagedCard.concat(String(mfrc522.uid.uidByte[i], HEX));
+  }
+
+  tagedCard.toUpperCase();                      //모두 대문자로 변환
+
+//관리자 카드번호와 맞는지 검증
+  if (tagedCard.substring(1) == MANAGER_CARD) {
+    relayToggle();
+    transferData(MANAGER_TAGED);
+  }
+```
+   <br>
+   
+Relay모듈을 이용하여 엘리베이터 전원을 차단한다.    
+스위치가 작동하지 않고 LCD에 
+<span style="color:skyblue">점검중</span>
+이란 문구가 표시된다.
+
+ ```c++
+// 릴레이 토글 함수
+void relayToggle() {
+  digitalWrite(RELAY_PIN, isTaged);
+  presentFloorDigitOff();
+  isTaged = !isTaged;
+}
+```
