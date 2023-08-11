@@ -166,6 +166,7 @@ bool isTaged = true;
    
 Relay모듈을 이용하여 엘리베이터 전원을 차단한다.    
 스위치가 작동하지 않고 LCD에 
+<mark>점검중</mark>
 <span style="color:skyblue">점검중</span>
 이란 문구가 표시된다.
 
