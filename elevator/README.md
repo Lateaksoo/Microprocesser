@@ -7,13 +7,37 @@
 
 ### **개요**
 - ATMEGA 2560 과 모터 및 센서를 이용한 엘리베이터 시스템 구현
-- RFID 를 이용하여 관리자 점검 카드 기능
-- Interrupt를 이용한 버튼 동작
+- I2C 통신을 이용하여 두 보드간 통신 
+- RFID 통신을 이용하여 관리자 카드 기능 구현
+- LCD를 이용한 실시간 화면 표시
+- Interrupt 를 이용한 버튼의 동작
+
+**앞부분 모습** <br>
+<img src="https://github.com/Lateaksoo/Microprocesser/blob/master/elevator/Image/front.png?raw=true" alt="아두이노" width="400">
+
+### **사용된 부품**
+|부품명|사용 개수|사용 목적|
+|---|---|---
+|ATMEGA 2560 Master| 1 |Step Motor 동작, 7-Segment 동작, RC522 RFID 동작, Relay 동작, 버튼 동작 |
+|ATMEGA 2560 Slave| 1 |LCD 동작,부저 동작, 비상정지 버튼 동작|
+|Push-Button   |4   |엘리베이터의 각 층 버튼 구현 및 비상 호출 버튼
+|28BYJ-48 Step Motor|1 |엘리베이터의 상하 이동 
+|7-Segment | 3 | 각 층의 번호 표시
+|Piezo Buzzer|1 | 엘리베이터 층 도착시 알림음 재생
+|RC522 RFID  |1  |엘리베이터 관리자 점검 카드
+|Relay Module|1 | 엘리베이터 전원 차단 기능
+|LCD | 1| 엘리베이터 움직임 애니메이션, 층 수 표시, 점검중 표시
+
+
 
 ### **개발 중 어려웠던 점**
 아두이노는 하나의 Thread만이 동작하기 때문에 delay를 최대한 쓰지 않고 구현해야 하는 점이 힘들었다.   
 LCD에 애니메이션을 표시하면 중간에 다른 동작을 할 수 없는 문제가 발생했다. 이를 해결하고자 듀얼코어에서 아이디어를 착안<br>
 두개의 아두이노 보드를 사용하기로 했다. 각자 다른 프로그램을 Upload 하고 서로의 상태를 I2C 통신을 이용해 상수값으로 주고 받아 공유 할 수 있도록 구현했다. 
+
+**ATMEGA 2560을 두개 연결한 모습** <br>
+<img src="https://github.com/Lateaksoo/Microprocesser/blob/master/elevator/Image/ATMEGA_dual.png?raw=true" alt="아두이노" width="400">
+
 
 ### **프로그램 주요 코드 설명**
 
@@ -88,15 +112,3 @@ const char EMERGENCY_STOPPED = 'e';
 
 
 
-### **사용된 부품**
-|부품명|사용 개수|사용 목적|
-|---|---|---
-|ATMEGA 2560 Master| 1 |Step Motor 동작, 7-Segment 동작, RC522 RFID 동작, Relay 동작, 버튼 동작 |
-|ATMEGA 2560 Slave| 1 |LCD 동작,부저 동작, 비상정지 버튼 동작|
-|Push-Button   |4   |엘리베이터의 각 층 버튼 구현 및 비상 호출 버튼
-|28BYJ-48 Step Motor|1 |엘리베이터의 상하 이동 
-|7-Segment | 3 | 각 층의 번호 표시
-|Piezo Buzzer|1 | 엘리베이터 층 도착시 알림음 재생
-|RC522 RFID  |1  |엘리베이터 관리자 점검 카드
-|Relay Module|1 | 엘리베이터 전원 차단 기능
-|LCD | 1| 엘리베이터 움직임 애니메이션, 층 수 표시, 점검중 표시
