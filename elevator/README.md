@@ -117,7 +117,7 @@ RFID 모듈로 통신하여 Card UID 가 일치하는 카드를 태그 시 Relay
 
 특정 카드만 인식하도록 코드를 설정했다.    
 <span style="color:red">실제로는 보안상 노출하지 않는것이 좋다.</span>
-
+<span style="background-color:#FFE6E6"> 빨강형광펜 </span>
  ```c++
 /**
   RFID 관련
