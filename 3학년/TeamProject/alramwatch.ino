@@ -258,43 +258,37 @@ if (s == 60){  //초가 60초가되면 초기화 +1분
 
 }
  
-void date(){
-  //날짜 부분
-  lcd.setCursor(0,0); //lcd 첫번째 줄에 표시
-  lcd.print("Date"); 
-  lcd.print(":"); 
-  lcd.print(y); 
-  lcd.print(":"); 
- 
-if(m<10){ //달이 한자리수일때 앞에 0표시 
-  lcd.setCursor(10,0);
-  lcd.print("0");
-  lcd.print(m);
-  
-}
-else if(m>=10){ //달이 두자리수일때 
-  lcd.print(m); 
+void date() {
+  // 날짜 부분
+  lcd.setCursor(0, 0); // lcd 첫번째 줄에 표시
+  lcd.print("Date");
+  lcd.print(":");
+  lcd.print(y);
+  lcd.print(":");
+
+  if (m < 10) { // 달이 한자리수일때 앞에 0표시 
+    lcd.setCursor(10, 0);
+    lcd.print("0");
+    lcd.print(m);
+  } else if (m >= 10) { // 달이 두자리수일때 
+    lcd.print(m);
   }
-  
-   if(d<10){ //일이 한자리수일때 앞에 0이 표시 
-  lcd.setCursor(12,0);
-  lcd.print(":");
-  lcd.print("0");
-  lcd.print(d);
+
+  if (d < 10) { // 일이 한자리수일때 앞에 0이 표시 
+    lcd.setCursor(12, 0);
+    lcd.print(":");
+    lcd.print("0");
+    lcd.print(d);
+  } else if (d >= 10) { // 두자리수일때 
+    lcd.print(":");
+    lcd.print(d);
+  }
+
+  if (digitalRead(bt3) == HIGH) {
+    y = y + 1;
+  }
 }
-else if(d>=10){ //두자리수일때 
-  lcd.print(":");
-  lcd.print(d); 
-  } 
-   
-  } 
-  if(digitalRead(bt3)==HIGH) 
-  { 
-    y=y+1; 
-   
-  } 
-}
-}
+
  
 void ringring(){ //알람부분 
   if(ah==h && ab==b && as==s){ //설정시간과 현재시간이 같으면 알람이 울린다 
@@ -304,7 +298,6 @@ void ringring(){ //알람부분
     for(int i=0;i<26;i++){
       watch();
       tone(buzzer,melody1[i],tempo);
-      delay(10 g4rrrrr  0);
       ah=0;
       ab=0;
       as=0;
@@ -314,8 +307,6 @@ void ringring(){ //알람부분
  
  
 void loop() {
-
- 
 if(digitalRead(bt6)==HIGH){ //알람시계 부분 
   alramwatch();
   delay(100);//이게 없으면 버튼6번 눌렀을때 화면이 너무 깜빡거림 
