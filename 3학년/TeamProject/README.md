@@ -2,7 +2,7 @@
 [알람시계 Github] <br>
 [알람시계 동작영상]
 
-[알람시계 Github]: https://github.com/Lateaksoo/Microprocesser/tree/master/elevator#readme
+[알람시계 Github]: https://github.com/Lateaksoo/Microprocesser/tree/master/3%ED%95%99%EB%85%84/TeamProject
 [알람시계 동작영상]: https://www.youtube.com/watch?v=W6zqfcXDg6w
 
 ### **개요**
